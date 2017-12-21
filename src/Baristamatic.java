@@ -13,25 +13,25 @@ public class Baristamatic
     {
         System.out.println("Inventory:\n");
 
-        for(int i = 0; i < data.ingredientsAvailable.length; i++)
+        for(int i = 0; i < data.getIngredientsAvailable().length; i++)
         {
-            System.out.println(data.ingredientsAvailable[i].name
+            System.out.println(data.getIngredientsAvailable()[i].getName()
                     +","
-                    + data.ingredientsAvailable[i].quantity);
+                    + data.getIngredientsAvailable()[i].getQuantity());
             System.out.println();
         }
 
         System.out.println("Menu:\n");
 
-        for(int i = 0; i < data.drinks.length; i++)
+        for(int i = 0; i < data.getDrinks().length; i++)
         {
-            System.out.println(data.drinks[i].number+
+            System.out.println(data.getDrinks()[i].getNumber()+
                     ","+
-                    data.drinks[i].name+
+                    data.getDrinks()[i].getName()+
                     ",$"+
-                    df.format(data.drinks[i].cost)+
+                    df.format(data.getDrinks()[i].getCost())+
                     ","+
-                    canMake(data.drinks[i].number));
+                    canMake(data.getDrinks()[i].getNumber()));
             System.out.println();
         }
     }
@@ -41,21 +41,21 @@ public class Baristamatic
     private boolean canMake(int number)
     {
         Drink drink = null;
-        for (int i = 0; i < data.drinks.length; i++)
+        for (int i = 0; i < data.getDrinks().length; i++)
         {
-            if (number == data.drinks[i].number)
+            if (number == data.getDrinks()[i].getNumber())
             {
-                drink = data.drinks[i];
+                drink = data.getDrinks()[i];
             }
         }
 
-        for (int i = 0; i < drink.ingredientsNeeded.length; i++)
+        for (int i = 0; i < drink.getIngredientsNeeded().length; i++)
         {
-            for (int j = 0; j < data.ingredientsAvailable.length; j++)
+            for (int j = 0; j < data.getIngredientsAvailable().length; j++)
             {
-                if (drink.ingredientsNeeded[i].name.equals(data.ingredientsAvailable[j].name))
+                if (drink.getIngredientsNeeded()[i].getName().equals(data.getIngredientsAvailable()[j].getName()))
                 {
-                    if (data.ingredientsAvailable[j].quantity <= drink.ingredientsNeeded[i].quantity)
+                    if (data.getIngredientsAvailable()[j].getQuantity() <= drink.getIngredientsNeeded()[i].getQuantity())
                     {
                         return false;
                     }
@@ -67,9 +67,9 @@ public class Baristamatic
 
     private void restock()
     {
-        for (int i = 0; i< data.ingredientsAvailable.length; i++)
+        for (int i = 0; i< data.getIngredientsAvailable().length; i++)
         {
-            data.ingredientsAvailable[i].quantity = 10;
+            data.getIngredientsAvailable()[i].setQuantity(10);
         }
     }
 
@@ -78,11 +78,11 @@ public class Baristamatic
     private void orderDrink(int number)
     {
         Drink drink = null;
-        for (int i = 0; i < data.drinks.length; i++)
+        for (int i = 0; i < data.getDrinks().length; i++)
         {
-            if (number == data.drinks[i].number)
+            if (number == data.getDrinks()[i].getNumber())
             {
-                drink = data.drinks[i];
+                drink = data.getDrinks()[i];
             }
         }
 
@@ -92,19 +92,19 @@ public class Baristamatic
             return;
         }
 
-        if (!canMake(drink.number))
+        if (!canMake(drink.getNumber()))
         {
             System.out.println("\nWe do not have enough ingredients to make this drink\n");
             return;
         }
 
-        for (int i = 0; i < drink.ingredientsNeeded.length; i++)
+        for (int i = 0; i < drink.getIngredientsNeeded().length; i++)
         {
-            for (int j = 0; j < data.ingredientsAvailable.length; j++)
+            for (int j = 0; j < data.getIngredientsAvailable().length; j++)
             {
-                if (drink.ingredientsNeeded[i].name.equals(data.ingredientsAvailable[j].name))
+                if (drink.getIngredientsNeeded()[i].getName().equals(data.getIngredientsAvailable()[j].getName()))
                 {
-                    data.ingredientsAvailable[j].quantity -= drink.ingredientsNeeded[i].quantity;
+                    data.getIngredientsAvailable()[j].setQuantity(data.getIngredientsAvailable()[j].getQuantity() - drink.getIngredientsNeeded()[i].getQuantity());
                 }
             }
         }
@@ -114,6 +114,8 @@ public class Baristamatic
     void enterCommand()
     {
         displayInventoryAndMenu();
+
+        System.out.println("\nOrder a drink by entering the drink's number below:");
 
         // Create a scanner so we can read the command-line input
         Scanner scanner = new Scanner(System.in);

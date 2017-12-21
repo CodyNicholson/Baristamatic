@@ -45,4 +45,12 @@ public class Data
     IngredientListItem cocoai        = new IngredientListItem("Cocoa");
     IngredientListItem whippedCreami = new IngredientListItem("Whipped Cream");
     IngredientListItem[] ingredientsAvailable = {coffeei, decafCoffeei, sugari, creami, steamedMilki, foamedMilki, expressoi, cocoai, whippedCreami};
+
+    public Drink[] getDrinks() {
+        return drinks;
+    }
+
+    public IngredientListItem[] getIngredientsAvailable() {
+        return ingredientsAvailable;
+    }
 }

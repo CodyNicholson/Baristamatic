@@ -19,4 +19,36 @@ public class Drink
             this.cost += ingredientsNeeded[i].cost * ingredientsNeeded[i].quantity;
         }
     }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getCost() {
+        return cost;
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
+    }
+
+    public IngredientNeeded[] getIngredientsNeeded() {
+        return ingredientsNeeded;
+    }
+
+    public void setIngredientsNeeded(IngredientNeeded[] ingredientsNeeded) {
+        this.ingredientsNeeded = ingredientsNeeded;
+    }
 }
